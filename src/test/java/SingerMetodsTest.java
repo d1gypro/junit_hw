@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 
 class SingerMetodsTest {
 
@@ -27,7 +27,6 @@ class SingerMetodsTest {
 
     @Test
     void findMostPopularSingerPrice() {
-
         int actual = 5_000_000;
         int notactual = 2_250_000;
         int expected = SingerMetods.findMostPopularSingerPrice(singers);
@@ -66,4 +65,27 @@ class SingerMetodsTest {
 
         assertThat(expected, hasSize(3));
     }
+
+    @Test
+    void findTop3SingersFamilyHamcrestContainsTest () {
+        List<String> expected = SingerMetods.findTop3SingersFamily(singers);
+
+        assertThat(expected, contains("Kontrobasova", "Gitara", "Barabanov"));
+    }
+
+    @Test
+    void findYoungestSingerFamilyHamcrestNotNullTest() {
+        String expected = SingerMetods.findYoungestSingerFamily(singers);
+
+        assertThat(expected, notNullValue());
+    }
+
+    @Test
+    void findYoungestSingerFamilyHamcrestContainsInOneOfTest () {
+        String[] actual = {"Bochkin", "Fleytin", "Bragin", "Pisk"};
+        String expected = SingerMetods.findYoungestSingerFamily(singers);
+
+        assertThat(expected, isOneOf(actual));
+    }
+
 }
